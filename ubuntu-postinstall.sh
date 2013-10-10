@@ -20,7 +20,7 @@ VERSION="1.12.3"
 #
 LISTE=""
 # Essentiels
-LISTE="$LISTE build-essential vim"
+LISTE="$LISTE build-essential vim terminator"
 # Developpement
 LISTE_DEV="git git-core"
 # Network
@@ -36,7 +36,6 @@ NO_ARGS=0
 E_ERREUR_OPTION=65
 E_ERREUR_NO_ROOT=126
 
-O_FLAG=0
 
 # couleurs
 BLACK=$(tput setaf 0)
@@ -76,24 +75,20 @@ function usage(){
 # Construction de la liste des paquets à installer
 function addDev(){
     LISTE="$LISTE $LISTE_DEV"
-    O_FLAG=1
 }
 
 function addNet(){
     LISTE="$LISTE $LISTE_NET"
-    O_FLAG=1
 }
 
 function addSys(){
     apt-add-repository -y ppa:teejee2008/ppa #for conky-manager
     LISTE="$LISTE $LISTE_SYSTEM"
-    O_FLAG=1
 }
 
 function addDropbox(){
     add-apt-repository -y ppa:nilarimogard/webupd8 # WebUpd8 (lots of fresh software)
     LISTE=$LISTE" dropbox-share"
-    O_FLAG=1
 }
 
 function addAll(){
@@ -101,15 +96,6 @@ function addAll(){
     addNet
     addSys
     addDropbox
-    O_FLAG=1
-}
-
-function defaultOptions(){
-    echo "$O_FLAG"
-    if [ "$O_FLAG" -eq 0 ]; then
-        addAll
-        echo "All done"
-    fi
 }
 
 #=============================================================================
@@ -148,7 +134,7 @@ while true ; do
         -d|--dev) addDev; shift;;
         -s|--system) addSys; shift;;
         --dropbox) addDropbox;shift;;
-        --) defaultOptions;shift; break;;
+        --) shift; break;;
     esac
 done
 
@@ -184,6 +170,12 @@ apt-get -y install $LISTE
 
 # Vimrc
 wget -O - https://raw.github.com/vgod/vimrc/master/auto-install.sh | sh
+
+# Terminator
+mkdir -p ~/.config/terminator
+wget -O ~/.config/terminator/config https://raw.github.com/Corgumolax/ubuntupostinstall/master/config.terminator
+chown -R $USER:$USER ~/.config/terminator
+
 
 # bash_aliases
 cat >> $HOME/.bash_aliases << EOF
