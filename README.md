@@ -26,8 +26,8 @@ Just download and run it with the following command lines:
     $ sudo ./ubuntu-postinstall.sh
 ## Options Available
     -h, --help:     Affiche l'aide
-    -a, --all:      Ajoute les paquets de toutes les catégories."
-    -n, --net:      Ajoute les paquets utilitaires réseau"
-    -d, --dev:      Ajoute les paquets pour développements"
-    -s, --system:   Ajoute les paquets utitaires système"
-    --dropbox:      Installe dropbox"
+    -a, --all:      Ajoute les paquets de toutes les catégories.
+    -n, --net:      Ajoute les paquets utilitaires réseau
+    -d, --dev:      Ajoute les paquets pour développements
+    -s, --system:   Ajoute les paquets utitaires système
+    --dropbox:      Installe dropbox
